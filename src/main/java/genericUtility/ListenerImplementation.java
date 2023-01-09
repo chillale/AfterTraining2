@@ -1,11 +1,10 @@
 package genericUtility;
 
 import java.util.Random;
-import static genericUtility.BaseClassH.*;
+import genericUtility.BaseClassH.*;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -25,7 +24,7 @@ public class ListenerImplementation implements ITestListener{
 
 	public void onTestFailure(ITestResult result) {
 		String path = null;
-		path = takeScreenShot(result.getMethod().getMethodName());
+		path = BaseClassH.takeScreenShot(result.getMethod().getMethodName());
 		test.log(Status.FAIL, result.getMethod().getMethodName()+ " got failed");
 		test.log(Status.FAIL, result.getThrowable());
 		test.addScreenCaptureFromPath(path);

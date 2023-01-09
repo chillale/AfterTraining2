@@ -10,6 +10,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import com.google.common.io.Files;
 
 import static genericUtility.PropertyFile.*;
 
@@ -39,6 +40,7 @@ public class BaseClassH {
 	public void launchTheBrowser() throws Throwable {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
+		sdriver=driver;
 		driver.get(readDataFromPropertyFile("url"));
 		webDriverUtility = new WebDriverUtility(driver);
 		webDriverUtility.maximize();
@@ -67,12 +69,12 @@ public class BaseClassH {
 	}
 	
 	public static String takeScreenShot(String name) {
-		TakesScreenshot takeScrenShot = (TakesScreenshot)BaseClass.sdriver;
+		TakesScreenshot takeScrenShot = (TakesScreenshot)BaseClassH.sdriver;
 		File src = takeScrenShot.getScreenshotAs(OutputType.FILE);
 		String path = "./ScreenShot1/"+name+".PNG";
 		File dest = new File(path);
 		try {
-		FileUtils.copyFile(src, dest);
+		Files.copy(src, dest);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
